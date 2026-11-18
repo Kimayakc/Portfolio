@@ -2,10 +2,11 @@
 [build]
   publish = "."
 
-# GMAIL_USER is the public contact address already shown on the page, so it
-# is not a secret. Omit it from the secrets scan. GMAIL_APP_PASSWORD stays scanned.
+# GMAIL_USER and CONTACT_TO are the public contact address already shown on the
+# page (CONTACT_TO defaults to GMAIL_USER), so they are not secrets. Omit them from
+# the secrets scan. GMAIL_APP_PASSWORD stays scanned.
 [build.environment]
-  SECRETS_SCAN_OMIT_KEYS = "GMAIL_USER"
+  SECRETS_SCAN_OMIT_KEYS = "GMAIL_USER,CONTACT_TO"
 
 # submission-created.js runs after every verified Netlify Forms submission
 # and emails it via Gmail (needs GMAIL_USER and GMAIL_APP_PASSWORD).
