@@ -312,7 +312,9 @@
           setStatus('Thanks, your message has been sent.', 'is-success');
         })
         .catch(function () {
-          setStatus('Your message could not be sent. Please try again, or email kimayachuri04@gmail.com directly.', 'is-error');
+          var mailLink = document.querySelector('a[href^="mailto:"]');
+          var address = mailLink ? mailLink.getAttribute('href').slice('mailto:'.length) : '';
+          setStatus('Your message could not be sent. Please try again' + (address ? ', or email ' + address + ' directly.' : '.'), 'is-error');
         })
         .then(function () { setBusy(false); });
     });
