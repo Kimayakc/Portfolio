@@ -1,0 +1,53 @@
+# Netlify: static site, no build step. The site root is this folder.
+[build]
+  publish = "."
+
+# submission-created.js runs after every verified Netlify Forms submission
+# and emails it via Gmail (needs GMAIL_USER and GMAIL_APP_PASSWORD).
+[functions]
+  directory = "netlify/functions"
+
+# Serve the CV inline so "View CV" opens it in the browser's PDF viewer
+# (in a new tab) instead of forcing a download.
+[[headers]]
+  for = "/Kimaya_Churi_CV.pdf"
+  [headers.values]
+    Content-Type = "application/pdf"
+    Content-Disposition = "inline; filename=\"Kimaya_Churi_CV.pdf\""
+    Cache-Control = "public, max-age=3600, must-revalidate"
+    X-Content-Type-Options = "nosniff"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# Project files that live in the publish folder but are not part of the site.
+[[redirects]]
+  from = "/Plan.md"
+  to = "/"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/netlify.toml"
+  to = "/"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/netlify/*"
+  to = "/"
+  status = 404
+  force = true
